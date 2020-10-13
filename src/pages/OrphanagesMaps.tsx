@@ -32,13 +32,13 @@ function OrphanageMap() {
       </aside>
 
       <Map 
-        center={[-16.6914779,-49.2703417]} 
-        zoom={15}
+        center={[-16.6838756,-49.2596639]} 
+        zoom={14}
         style={{ width: '100%', height: '100%' }}
         >
-{/*           <TileLayer url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png" /> */}
+          {/* <TileLayer url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png" /> */}
           <TileLayer 
-          url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?acess_token=${process.env.REACT_APP_MAPBOX_TOKEN}` }/>
+          url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}` }/>
         </Map>
       
 

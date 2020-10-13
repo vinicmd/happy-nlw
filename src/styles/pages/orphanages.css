@@ -37,7 +37,7 @@
 #page-map aside strong{
   font-weight: 800;
 }
-#page-map .leaflet-conteiner{
+#page-map .leaflet-container{
   z-index: 5;
 }
 #page-map .create-orphanage{
