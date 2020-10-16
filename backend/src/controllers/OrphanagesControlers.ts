@@ -15,8 +15,10 @@ export default{
     return response.json(orphanageView.renderMany(orphanages));
 
   },
+
   async show(request : Request, response: Response) {
     const {id} = request.params;
+
     const orphanagesReposotory = getRepository(Orphanage);
 
     const orphanage = await orphanagesReposotory.findOneOrFail(id, {
@@ -24,7 +26,6 @@ export default{
     });
     
     return response.json(orphanageView.render(orphanage));
-
   },
 
   async create(request : Request, response: Response) {
@@ -53,7 +54,7 @@ export default{
       about, 
       instructions, 
       opening_hours,
-      open_on_weekends,
+      open_on_weekends: open_on_weekends === 'true',
       images
     };
 
