@@ -7,10 +7,24 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 
 import mapMarker from '../images/map-marker.png';
 import { RectButton } from 'react-native-gesture-handler';
+import { useEffect, useState } from 'react';
+import api from '../services/api';
 
+interface Orphanage{
+  id: number;
+  name: string;
+  latitude: number;
+  longitude: number;
+}
 export default function OrphanagesMap(){
-
+  const [orphanages, setOrphanages] = useState<Orphanage[]>([]);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    api.get('orphanages').then(response => {
+      setOrphanages(response.data);
+    })
+  }, [])
 
   function handleNavigationToOrphanageDetails(){
     navigation.navigate('OrphanageDetails');
@@ -31,26 +45,31 @@ export default function OrphanagesMap(){
           longitudeDelta: 0.008,
         }} >
 
-          <Marker 
-            icon={mapMarker}
-            calloutAnchor={{
-              x: 2.7,
-              y: 0.8,
-            }}
-            coordinate={{
-              latitude: -16.6794485,
-              longitude: -49.2576547,
-            }}
-          >
+          {orphanages.map(orphanage => {
+            return(
+              <Marker 
+              key={orphanage.id}
+              icon={mapMarker}
+              calloutAnchor={{
+                x: 2.7,
+                y: 0.8,
+              }}
+              coordinate={{
+                latitude: orphanage.latitude,
+                longitude: orphanage.longitude,
+              }}
+              >
 
-            <Callout tooltip onPress= {handleNavigationToOrphanageDetails}>
-              <View style={styles.calloutContainer}>
-                <Text style={styles.calloutText}>Lar das Meninas</Text>
-              </View>
-            </Callout>
+                <Callout tooltip onPress= {handleNavigationToOrphanageDetails}>
+                  <View style={styles.calloutContainer}>
+                    <Text style={styles.calloutText}>{orphanage.name}</Text>
+                  </View>
+                </Callout>
 
 
-          </Marker>
+              </Marker>
+            )
+          })}
             
 
         </Mapview>
