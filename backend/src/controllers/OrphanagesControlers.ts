@@ -1,8 +1,9 @@
 import {Request, Response} from 'express';
 import { getRepository } from 'typeorm';
+import * as Yup from 'yup';
+
 import Orphanage from '../models/Orphanage';
 import orphanageView from '../views/orphanages_view';
-import * as Yup from 'yup';
 
 export default{
   async index(request : Request, response: Response) {
@@ -82,6 +83,5 @@ export default{
     await orphanagesReposotory.save(orphanage);
   
     return response.status(201).json(orphanage);
-  
   }
 }
